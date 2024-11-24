@@ -111,7 +111,7 @@ export default function Hero() {
               className="relative w-full aspect-square max-w-md mx-auto"
             >
               <img
-                src="./src/components/DP.jpg"
+                src="./DP.jpg"
                 alt="Pritish Khera"
                 className="rounded-3xl shadow-2xl object-cover w-full h-full"
               />
