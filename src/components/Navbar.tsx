@@ -25,7 +25,7 @@ export default function Navbar() {
     const element = document.getElementById(targetSection);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
+      setIsOpen(false); // Close mobile menu after clicking an item
     }
   };
 
@@ -93,24 +93,27 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-        className="md:hidden overflow-hidden bg-white dark:bg-gray-900"
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          {navItems.map((item) => (
-            <motion.button
-              key={item}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection(item)}
-              className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            >
-              {item}
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden absolute top-16 left-0 w-full bg-white dark:bg-gray-900"
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navItems.map((item) => (
+              <motion.button
+                key={item}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection(item)}
+                className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                {item}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </motion.nav>
   );
 }
